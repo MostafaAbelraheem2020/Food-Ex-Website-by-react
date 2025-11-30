@@ -9,7 +9,7 @@ Designed for quick local development, easy data seeding and simple admin tools.
 - Material UI — layout & components
 - SweetAlert2 — friendly alerts
 - Local JSON seeds: [src/components/mealsData.json](src/components/mealsData.json), [src/components/rating.json](src/components/rating.json)
-
+## project preview by https://food-ex-website-by-react-d5uc.vercel.app/
 ## Quick start
 1. Install deps
    ```sh
