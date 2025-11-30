@@ -1,0 +1,337 @@
+[
+  {
+    "id": 1,
+    "name": "Chicken Biryani",
+    "description": "Spicy and flavorful chicken biryani.",
+    "price": 12.99,
+    "category": "Main Course",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 358,
+    "isFavorite": false
+  },
+  {
+    "id": 2,
+    "name": "Margherita Pizza",
+    "description": "Classic pizza with fresh mozzarella and basil.",
+    "price": 9.99,
+    "category": "Pizza",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 189,
+    "isFavorite": false
+  },
+  {
+    "id": 3,
+    "name": "Caesar Salad",
+    "description": "Crisp romaine lettuce with Caesar dressing.",
+    "price": 7.99,
+    "category": "Salad",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 451,
+    "isFavorite": false
+  },
+  {
+    "id": 4,
+    "name": "Beef Burger",
+    "description": "Juicy beef patty with lettuce, tomato, and cheese.",
+    "price": 10.99,
+    "category": "Burger",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 101,
+    "isFavorite": false
+  },
+  {
+    "id": 5,
+    "name": "Pasta Alfredo",
+    "description": "Creamy Alfredo sauce with fettuccine pasta.",
+    "price": 11.99,
+    "category": "Pasta",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 754,
+    "isFavorite": false
+  },
+  {
+    "id": 6,
+    "name": "Grilled Salmon",
+    "description": "Fresh salmon grilled to perfection.",
+    "price": 15.99,
+    "category": "Seafood",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 652,
+    "isFavorite": false
+  },
+  {
+    "id": 7,
+    "name": "Tacos",
+    "description": "Soft tacos filled with seasoned meat and toppings.",
+    "price": 8.99,
+    "category": "Mexican",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 988,
+    "isFavorite": false
+  },
+  {
+    "id": 8,
+    "name": "Sushi Platter",
+    "description": "Assorted sushi rolls and sashimi.",
+    "price": 18.99,
+    "category": "Japanese",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 499,
+    "isFavorite": false
+  },
+  {
+    "id": 9,
+    "name": "Vegetable Stir Fry",
+    "description": "Mixed vegetables stir-fried in a savory sauce.",
+    "price": 9.49,
+    "category": "Vegetarian",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 781,
+    "isFavorite": false
+  },
+  {
+    "id": 10,
+    "name": "Chocolate Cake",
+    "description": "Rich and moist chocolate cake.",
+    "price": 6.99,
+    "category": "Dessert",
+    "mealType": "Breakfast",
+
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+
+    "rate": 789,
+
+    "isFavorite": false
+  },
+  {
+    "id": 11,
+    "name": "Pancakes",
+    "description": "Fluffy pancakes served with syrup.",
+    "price": 5.99,
+    "category": "Breakfast",
+    "mealType": "Breakfast",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 789,
+    "isFavorite": false
+  },
+  {
+    "id": 12,
+    "name": "French Toast",
+    "description": "Golden-brown French toast with powdered sugar.",
+    "price": 6.49,
+    "category": "Breakfast",
+    "mealType": "Breakfast",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 887,
+    "isFavorite": false
+  },
+  {
+    "id": 13,
+    "name": "Greek Salad",
+    "description": "Fresh vegetables with feta cheese and olives.",
+    "price": 8.49,
+    "category": "Salad",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 154,
+    "isFavorite": false
+  },
+  {
+    "id": 14,
+    "name": "BBQ Ribs",
+    "description": "Tender ribs with smoky BBQ sauce.",
+    "price": 14.99,
+    "category": "Main Course",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 789,
+    "isFavorite": false
+  },
+  {
+    "id": 15,
+    "name": "Shrimp Tacos",
+    "description": "Tacos filled with seasoned shrimp and toppings.",
+    "price": 10.99,
+    "category": "Mexican",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 789,
+    "isFavorite": false
+  },
+  {
+    "id": 16,
+    "name": "Veggie Pizza",
+    "description": "Pizza topped with fresh vegetables.",
+    "price": 8.99,
+    "category": "Pizza",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 158,
+    "isFavorite": false
+  },
+  {
+    "id": 17,
+    "name": "Lamb Chops",
+    "description": "Grilled lamb chops with herbs.",
+    "price": 19.99,
+    "category": "Main Course",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 121,
+    "isFavorite": false
+  },
+  {
+    "id": 18,
+    "name": "Tomato Soup",
+    "description": "Creamy tomato soup with croutons.",
+    "price": 5.99,
+    "category": "Soup",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 789,
+    "isFavorite": false
+  },
+  {
+    "id": 19,
+    "name": "Ice Cream Sundae",
+    "description": "Vanilla ice cream with chocolate syrup and nuts.",
+    "price": 4.99,
+    "category": "Dessert",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 212,
+    "isFavorite": false
+  },
+  {
+    "id": 20,
+    "name": "Avocado Toast",
+    "description": "Toasted bread topped with avocado and spices.",
+    "price": 7.49,
+    "category": "Breakfast",
+    "mealType": "Breakfast",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 955,
+    "isFavorite": false
+  },
+  {
+    "id": 21,
+    "name": "Chicken Wings",
+    "description": "Spicy and crispy chicken wings.",
+    "price": 9.99,
+    "category": "Appetizer",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 334,
+    "isFavorite": false
+  },
+  {
+    "id": 22,
+    "name": "Fish and Chips",
+    "description": "Crispy fried fish with golden fries.",
+    "price": 12.49,
+    "category": "Seafood",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 458,
+    "isFavorite": false
+  },
+  {
+    "id": 23,
+    "name": "Mango Smoothie",
+    "description": "Refreshing mango smoothie.",
+    "price": 4.99,
+    "category": "Beverage",
+    "mealType": "Breakfast",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 525,
+    "isFavorite": false
+  },
+  {
+    "id": 24,
+    "name": "Steak",
+    "description": "Grilled steak cooked to perfection.",
+    "price": 20.99,
+    "category": "Main Course",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 444,
+    "isFavorite": false
+  },
+  {
+    "id": 25,
+    "name": "Caprese Salad",
+    "description": "Tomatoes, mozzarella, and basil with olive oil.",
+    "price": 8.99,
+    "category": "Salad",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 125,
+    "isFavorite": false
+  },
+  {
+    "id": 26,
+    "name": "Egg Benedict",
+    "description": "Poached eggs on English muffins with hollandaise sauce.",
+    "price": 9.49,
+    "category": "Breakfast",
+    "mealType": "Breakfast",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+
+    "rate": 4522,
+    "isFavorite": false
+  },
+
+  {
+    "id": 27,
+    "name": "Pad Thai",
+    "description": "Stir-fried rice noodles with shrimp and peanuts.",
+    "price": 13.99,
+    "category": "Asian",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 411,
+    "isFavorite": false
+  },
+  {
+    "id": 28,
+    "name": "Cheesecake",
+    "description": "Creamy cheesecake with a graham cracker crust.",
+    "price": 6.99,
+    "category": "Dessert",
+    "mealType": "Dinner",
+    "img": "https://i.ibb.co/9mtkzG6P/P12.jpg",
+    "rate": 855,
+    "isFavorite": false
+  },
+  {
+    "id": 29,
+    "name": "Chicken Caesar Wrap",
+    "description": "Grilled chicken with Caesar salad in a wrap.",
+    "price": 8.99,
+    "category": "Wrap",
+    "mealType": "Lunch",
+    "img": "https://i.ibb.co/TBzWvZsM/P11.jpg",
+    "rate": 454,
+    "isFavorite": false
+  },
+  {
+    "id": 30,
+    "name": "Fruit Salad",
+    "description": "Fresh seasonal fruits in a bowl.",
+    "price": 5.99,
+    "category": "Dessert",
+    "mealType": "Breakfast",
+    "img": "https://i.ibb.co/vxF08Htv/P6.jpg",
+    "rate": 525,
+    "isFavorite": false
+  }
+]

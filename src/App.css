@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+  transition: 0.3s;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+.App h1 {
+  margin: 0;
+}
