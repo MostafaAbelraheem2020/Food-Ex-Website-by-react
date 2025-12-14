@@ -262,18 +262,5 @@ Modify the `src/components/mealsData.json` file to add new dishes.
 - **LinkedIn**: [Mostafa Mohamed](https://www.linkedin.com/in/mostafa-mohamed-63b87627a/)
 - **WhatsApp**: [01010317417](https://wa.me/01010317417)
 
-## 📄 License
-
-This project is open source and available for free use.
-
-## 👥 Contributors
-
-- Project developed using React and Firebase
-
-## 📞 Support
-
-For support and inquiries, please open an issue in the repository.
-
----
 
 **Developed with ❤️ using React and Firebase**
