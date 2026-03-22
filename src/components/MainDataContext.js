@@ -1,10 +1,10 @@
 import { createContext, useMemo, useState, useEffect } from "react";
 import {
-  collection,
+  // collection,
   doc,
   getDoc,
-  getDocs,
-  updateDoc,
+  // getDocs,
+  // updateDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
@@ -22,15 +22,15 @@ export const MyContextProvider = ({ children }) => {
     return localStorage.getItem("isLoggedIn") === "true" ? true : false;
   });
   const [search, setSearch] = useState(false);
-  const [userId, setUserId] = useState(null);
+  // const [userId, setUserId] = useState(null);
   const [userFavorites, setUserFavorites] = useState([]);
   const [mealRate, setMealRate] = useState(0);
 
-  // جلب بيانات المستخدم الحالي وتفضيلاته (Firebase Auth remains active)
+  // جلب بيانات المستخدم الحالي وتفضيلاته
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUserId(user.uid);
+        // setUserId(user.uid);
         try {
           const userDoc = await getDoc(doc(db, "users", user.uid));
           if (userDoc.exists()) {
@@ -41,23 +41,27 @@ export const MyContextProvider = ({ children }) => {
           console.warn("Firestore Auth Error (Ignored for now):", e.message);
         }
       } else {
-        setUserId(null);
+        // setUserId(null);
         setUserFavorites([]);
       }
     });
     return () => unsub();
   }, []);
 
-  // جلب الأطباق - الآن يعتمد على JSON محلي حصرياً (حسب طلب المستخدم)
+  // جلب الأطباق - الاعتماد على JSON محلي حصرياً مؤقتاً
   useEffect(() => {
     const fetchMenu = async () => {
       setLoading(true);
       
-      // تعليق العمل مع قاعدة البيانات مؤقتاً لبيانات المنيو
       /* 
       try {
         const menuSnapshot = await getDocs(collection(db, "menu"));
-        // ... Firestore logic
+        const items = menuSnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return { ...data, isFavorite: userFavorites.includes(data.id) };
+        });
+        setAllMeals(items);
+        setMeals(items);
       } catch (error) { ... }
       */
 
@@ -74,7 +78,7 @@ export const MyContextProvider = ({ children }) => {
     fetchMenu();
   }, [userFavorites, mealRate]);
 
-  // تحديث حقل معين في الطبق (معطل مؤقتاً للداتابيز)
+  // تحديث حقل معين في الطبق (معطل مؤقتاً)
   const updateMealField = async (id, updatedFields) => {
     console.log("Local Update (Simulated):", id, updatedFields);
     /* 
@@ -85,7 +89,7 @@ export const MyContextProvider = ({ children }) => {
     */
   };
 
-  // تحديث النشاط (معطل مؤقتاً للداتابيز)
+  // تحديث النشاط (معطل مؤقتاً)
   const UserActivatyFn = async (id, updatedFields) => {
     console.log("Activity Update (Simulated):", id, updatedFields);
     /* 
@@ -121,7 +125,7 @@ export const MyContextProvider = ({ children }) => {
     }
   };
 
-  // المفضلات (تعمل محلياً فقط الآن)
+  // المفضلات (تعمل محلياً فقط)
   const toggleFavorite = (id) => {
     let updatedFavorites;
     if (userFavorites.includes(id)) {
@@ -131,7 +135,6 @@ export const MyContextProvider = ({ children }) => {
     }
     setUserFavorites(updatedFavorites);
 
-    // تحديث محلي للمعدل (Simulated)
     if (meals) {
       const updated = meals.map((meal) => {
         if (meal.id === id) {
@@ -143,11 +146,9 @@ export const MyContextProvider = ({ children }) => {
       setMealRate((prevRate) => prevRate + 1);
     }
     
-    // حفظ التفضيلات في localStorage كبديل مؤقت لمصادقة قاعدة البيانات
     localStorage.setItem("localFavorites", JSON.stringify(updatedFavorites));
 
     /* 
-    // Firestore Update suspended as requested
     if (userId) {
       const userRef = doc(db, "users", userId);
       updateDoc(userRef, { "userActivety.favorites": updatedFavorites });
@@ -171,6 +172,7 @@ export const MyContextProvider = ({ children }) => {
         userRole,
         setUserRole,
         UserActivatyFn,
+        updateMealField,
       }}
     >
       {children}

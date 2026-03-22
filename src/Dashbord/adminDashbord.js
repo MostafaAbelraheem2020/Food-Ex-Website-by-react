@@ -24,7 +24,7 @@ function AdminDashbord() {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [rate, setRate] = useState("");
-const [meals, setLocalMeals] = useState([]);
+// const [meals, setLocalMeals] = useState([]);
   const [localMenuItems, setLocalMenuItems] = useState([]);
 
   useEffect(() => {

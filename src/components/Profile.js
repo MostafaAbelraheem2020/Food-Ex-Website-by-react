@@ -7,7 +7,7 @@ import {
   Card,
   Avatar,
   Stack,
-  Chip,
+//  Chip,
   Button,
   Divider,
 } from "@mui/material";
@@ -15,7 +15,7 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const pastOrders = [
   { id: "#4582", date: "Oct 12, 2023", total: 45.99, status: "Delivered", items: 3 },
