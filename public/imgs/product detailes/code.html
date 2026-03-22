@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Food Ex | Saffron-Infused Grilled Salmon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#874538",
+              "outline": "#6f7975",
+              "primary-container": "#2d7d6b",
+              "on-tertiary-container": "#fff3f1",
+              "on-secondary": "#ffffff",
+              "surface-tint": "#136a59",
+              "secondary-fixed": "#ffdad7",
+              "secondary-container": "#fc5d59",
+              "inverse-primary": "#88d5c0",
+              "background": "#f9f9f9",
+              "on-primary-container": "#d3fff1",
+              "primary-fixed": "#a3f2dc",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed-variant": "#005143",
+              "on-secondary-fixed": "#410004",
+              "surface-dim": "#dadada",
+              "on-error-container": "#93000a",
+              "on-background": "#1a1c1c",
+              "outline-variant": "#bec9c4",
+              "tertiary-fixed": "#ffdad3",
+              "on-primary-fixed": "#002019",
+              "on-tertiary-fixed-variant": "#723528",
+              "on-primary": "#ffffff",
+              "tertiary-fixed-dim": "#ffb4a4",
+              "surface-container-highest": "#e2e2e2",
+              "on-secondary-fixed-variant": "#910816",
+              "inverse-surface": "#2f3131",
+              "on-error": "#ffffff",
+              "on-secondary-container": "#600009",
+              "secondary": "#b3272a",
+              "inverse-on-surface": "#f1f1f1",
+              "tertiary-container": "#a45d4e",
+              "error": "#ba1a1a",
+              "surface-variant": "#e2e2e2",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#f9f9f9",
+              "primary": "#046453",
+              "on-surface": "#1a1c1c",
+              "surface-bright": "#f9f9f9",
+              "primary-fixed-dim": "#88d5c0",
+              "secondary-fixed-dim": "#ffb3ae",
+              "surface-container": "#eeeeee",
+              "error-container": "#ffdad6",
+              "on-surface-variant": "#3f4945",
+              "surface-container-low": "#f3f3f3",
+              "surface-container-high": "#e8e8e8",
+              "on-tertiary-fixed": "#3a0b03"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Work Sans"],
+              "label": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #f9f9f9;
+            color: #1a1c1c;
+        }
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .editorial-shadow {
+            box-shadow: 0 8px 32px rgba(26, 28, 28, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-teal-800 dark:text-teal-300 italic">Food Ex</div>
+<div class="hidden md:flex items-center space-x-8 font-plus-jakarta text-sm font-semibold tracking-tight">
+<a class="text-teal-700 dark:text-teal-400 border-b-2 border-teal-700 dark:border-teal-400 pb-1" href="#">Explore</a>
+<a class="text-neutral-600 dark:text-neutral-400 hover:text-teal-600 transition-colors" href="#">Menus</a>
+<a class="text-neutral-600 dark:text-neutral-400 hover:text-teal-600 transition-colors" href="#">Catering</a>
+<a class="text-neutral-600 dark:text-neutral-400 hover:text-teal-600 transition-colors" href="#">About</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="font-plus-jakarta text-sm font-semibold text-neutral-600 hover:bg-neutral-50 p-2 rounded-lg">Login</button>
+<button class="bg-primary hover:opacity-90 text-white px-5 py-2 rounded-full font-plus-jakarta text-sm font-semibold transition-all">Register</button>
+</div>
+</nav>
+</header>
+<main class="flex-grow pt-24 pb-16 px-6 max-w-7xl mx-auto w-full">
+<!-- Breadcrumb -->
+<nav class="mb-8 flex items-center space-x-2 text-label text-sm text-on-surface-variant/60">
+<span>Explore</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Main Course</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-medium">Saffron Grilled Salmon</span>
+</nav>
+<!-- Product Hero Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+<!-- Image Column -->
+<div class="lg:col-span-7 relative">
+<div class="sticky top-28">
+<div class="aspect-[4/5] rounded-[2rem] overflow-hidden editorial-shadow bg-surface-container-low relative">
+<img alt="Grilled Salmon" class="w-full h-full object-cover" data-alt="Gourmet saffron-infused grilled salmon with asparagus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKRhpBVN_6bum49pFHnocihip_EYe-6EJA8dXRSf5i6PJ_X9L53OCs2xjo_xKv228QZFqxy-QGWasb87qhf5AvJL9w9zxFZxxfaZycL4dZA7H0IK7iMZO5WwalErs77BiaEdpWdONX9ZZNKoP0e_omjHZLpICk-Tgbsko4SN9hilaKzVYhuiZJanFIQ6w-8SGILpHL6_jAP_B_U9MidPvoYk0Clxh8AyXMAbDeU-LlXH939jNXokaCsqc9Ap-DidHWJCmwY7yX2dU"/>
+<div class="absolute top-6 left-6 flex space-x-2">
+<span class="bg-secondary text-on-secondary px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Popular</span>
+</div>
+</div>
+<!-- Overlapping Badge -->
+<div class="absolute -bottom-6 -right-6 bg-surface-container-lowest p-6 rounded-2xl editorial-shadow flex items-center space-x-4">
+<div class="bg-primary-container text-on-primary-container w-12 h-12 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-weight="fill">verified</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-tighter">Chef's Choice</p>
+<p class="text-sm font-medium">Curated Daily</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Details Column -->
+<div class="lg:col-span-5 flex flex-col justify-center">
+<div class="mb-6">
+<div class="flex items-center space-x-1 text-secondary mb-3">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
+<span class="text-on-surface-variant text-sm font-medium ml-2">4.5 (128 Reviews)</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-black text-on-surface leading-tight mb-4">Saffron-Infused Grilled Salmon</h1>
+<p class="text-lg text-on-surface-variant font-light leading-relaxed">
+                        Hand-selected Atlantic salmon, marinated in premium Iranian saffron and Mediterranean citrus, charcoal-grilled to tender perfection. Served with a side of wilted organic asparagus.
+                    </p>
+</div>
+<!-- Pricing -->
+<div class="bg-surface-container-low p-6 rounded-2xl mb-8 flex items-end space-x-4">
+<span class="text-3xl font-bold text-primary">$34.50</span>
+<span class="text-on-surface-variant/40 line-through text-lg mb-1">$42.00</span>
+<span class="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded text-xs font-bold mb-1.5">15% OFF</span>
+</div>
+<!-- Customization Options -->
+<div class="space-y-8 mb-10">
+<!-- Spice Level -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Spice Level</h3>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2 rounded-full bg-surface-container-highest text-on-surface text-sm font-medium hover:bg-primary hover:text-white transition-all">Mild</button>
+<button class="px-6 py-2 rounded-full bg-secondary text-white text-sm font-bold transition-all">Medium</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-highest text-on-surface text-sm font-medium hover:bg-primary hover:text-white transition-all">Hot</button>
+</div>
+</div>
+<!-- Extras -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Enhance Your Plate</h3>
+<div class="space-y-3">
+<label class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-primary/20 transition-all cursor-pointer group">
+<div class="flex items-center space-x-3">
+<div class="w-5 h-5 rounded border-2 border-outline-variant group-hover:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary rounded-sm opacity-0 group-hover:opacity-0"></div>
+</div>
+<span class="text-sm font-medium">Extra Lemon Butter Sauce</span>
+</div>
+<span class="text-sm font-bold text-primary">+$2.50</span>
+<input class="hidden" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl border border-transparent hover:border-primary/20 transition-all cursor-pointer group">
+<div class="flex items-center space-x-3">
+<div class="w-5 h-5 rounded border-2 border-outline-variant group-hover:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary rounded-sm opacity-0 group-hover:opacity-0"></div>
+</div>
+<span class="text-sm font-medium">Garlic Herb Crust</span>
+</div>
+<span class="text-sm font-bold text-primary">+$1.75</span>
+<input class="hidden" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Quantity -->
+<div class="flex items-center space-x-6">
+<div class="flex items-center bg-surface-container-high rounded-full p-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="px-6 font-bold text-lg">01</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white editorial-shadow">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<p class="text-xs text-on-surface-variant font-medium">Free Delivery for Platinum Members</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded-full font-headline font-bold text-lg editorial-shadow hover:scale-[1.02] active:scale-95 transition-all">
+                        Buy Now
+                    </button>
+<button class="flex-1 bg-surface-container-highest text-on-surface py-4 rounded-full font-headline font-bold text-lg hover:bg-surface-container-high active:scale-95 transition-all flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span>Add to Cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recommendations Section -->
+<section class="mt-32">
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="text-secondary font-bold text-xs uppercase tracking-[0.3em]">The Curator Recommends</span>
+<h2 class="text-3xl font-black mt-2">You Might Also Like</h2>
+</div>
+<button class="text-primary font-bold text-sm flex items-center space-x-2 group">
+<span>View Full Menu</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Truffle Steak" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Juicy grilled steak with truffle butter topping" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvnSrnEouiAiaXHRgHUBdbXWIiTYqeLA8oDrTKFVEZ_cwLveOUvKq7UPQxlfPVGHKDHBkeY27cHLVLLGWCfeaEn-c3DA3sN3rU6MnSNIxJpZQXwkm1DCYTwIVFUcgQhJmedhJLociz_Ov9D_ygy9cpp-Gtye20VY-8mvPXN8l6i6UAJc06evavjMJAUxrb5sq-FVYq3mutrFn8ZP2gYj9JVN2jGAEnlGNuCz2btNgbrpb2vjDGA5HFJfIdDkAw_hKp88ln6Q-0Qd0"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.8</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">Truffle Ribeye Steak</h3>
+<div class="flex justify-between items-center">
+<span class="text-primary font-bold text-lg">$48.00</span>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Lobster Pasta" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Creamy lobster pasta with fresh herbs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWTHFSyXTvHRL-w2KLJU7KaZXetUrwyF3iZFsqiiaW3518i-60Hw20wm30r4iAg75QAFckBgw1VgpWpdpyirbeATYKOkqpcIEF_Bf0B-8Z6jU2cZOolQoj0cs1QsnF7LECT2KUlfD9OAkdmvcVn5d6JWIjucG8-rAQQkDb4cC6nHDmqQ8z1kSXhxKavULX6CORM4hQ3hmLolNYMX_9OtBccD8FL73PZJ3o2QWimVExWg2rWP7A6kHYBKrPnhfd83J3BU5WgTTMTVg"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.7</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">Creamy Lobster Linguine</h3>
+<div class="flex justify-between items-center">
+<span class="text-primary font-bold text-lg">$39.50</span>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Superfood Salad" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Fresh superfood salad bowl with avocado and seeds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4-CMC7YhMknsZLlMpCIv4IkwmxWHbywfNW6QWM_nmITyGzGntH9Y9iXbZunBblPxfWmQI9k9lhf5RJf5T4Ul7ahDvzqRs7_M03gGOcJFfUcXNSV_57i2H0zbTrfivGauYbmfeX5-NEuPYCHAI5s6t5htrFebEm8_5UZIeGk-xxahADser5VmHQwTZn7yQgSLRagQhWukbDrZ3NQG8b3aoudnXBCb6RVkvMK0hzrmZGXNaQ4jcYO8Q1NFdXwVRlK6AutmxBUApt34"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold mb-2">Curated Superfood Bowl</h3>
+<div class="flex justify-between items-center">
+<span class="text-primary font-bold text-lg">$22.00</span>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-neutral-100 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-12 max-w-7xl mx-auto">
+<div class="flex flex-col mb-8 md:mb-0">
+<div class="text-lg font-bold text-teal-800 dark:text-teal-500 mb-2">Food Ex</div>
+<p class="font-work-sans text-xs uppercase tracking-widest text-neutral-500">© 2024 Food Ex. The Culinary Curator.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-work-sans text-xs uppercase tracking-widest text-neutral-500 hover:text-teal-600 dark:hover:text-teal-300 hover:underline decoration-teal-500/30 transition-all" href="#">Privacy Policy</a>
+<a class="font-work-sans text-xs uppercase tracking-widest text-neutral-500 hover:text-teal-600 dark:hover:text-teal-300 hover:underline decoration-teal-500/30 transition-all" href="#">Terms of Service</a>
+<a class="font-work-sans text-xs uppercase tracking-widest text-neutral-500 hover:text-teal-600 dark:hover:text-teal-300 hover:underline decoration-teal-500/30 transition-all" href="#">Contact Us</a>
+<a class="font-work-sans text-xs uppercase tracking-widest text-neutral-500 hover:text-teal-600 dark:hover:text-teal-300 hover:underline decoration-teal-500/30 transition-all" href="#">Careers</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -11,6 +11,10 @@ import About from "./components/About";
 import Contact from "./components/contact";
 import SearchContent from "./components/searchContent";
 import MealDesc from "./components/MealDesc";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
+import Profile from "./components/Profile";
+import NotFound from "./components/NotFound";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -34,6 +38,10 @@ function App() {
             <Route path="/Contact" element={<Contact />} />
             <Route path="/SearchContent" element={<SearchContent />} />
             <Route path="/dish/:id" element={<MealDesc />} />
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </DataContextProvider>

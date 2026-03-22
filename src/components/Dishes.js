@@ -1,173 +1,211 @@
 import * as React from "react";
-
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useContext } from "react";
 import MyContext from "./MainDataContext";
 import { Link } from "react-router-dom";
+import { 
+  Grid, 
+  Card, 
+  CardMedia, 
+  CardContent, 
+  Typography, 
+  IconButton, 
+  Box, 
+  Chip 
+} from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import EastIcon from "@mui/icons-material/East";
 
 function Dishes() {
   const { meals, toggleFavorite } = useContext(MyContext);
 
   if (!Array.isArray(meals) || meals.length === 0) {
     return (
-      <Typography sx={{ textAlign: "center", mt: 4 }}>
-        لا توجد أطباق متاحة حالياً
-      </Typography>
+      <Box sx={{ py: 10, textAlign: 'center', opacity: 0.6 }}>
+        <Typography variant="h6" sx={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 700 }}>
+          No dishes found in this category
+        </Typography>
+      </Box>
     );
   }
 
   return (
-    <div
-      style={{
-        width: "100%",
-        flexDirection: "column",
-        padding: "10px",
-        flex: "1",
-      }}
-    >
-      {meals.map((item, index) => {
-        return (
-          <Card
-            key={index}
-            sx={{
-              width: "100%",
-              marginBottom: "10px",
-              backgroundColor: "#f5f5f5",
-              height: "250px",
-            }}
-          >
-            <CardHeader
+    <Box sx={{ width: "100%", px: { xs: 2, md: 4, lg: 6 }, py: 6 }}>
+      <Grid container spacing={{ xs: 3, md: 4 }}>
+        {meals.map((item) => (
+          <Grid item xs={12} sm={6} md={6} lg={6} xl={6} key={item.id}>
+            <Card
               sx={{
-                height: "25%",
-                display: "flex",
-                alignItems: "center",
-                color: "gray",
-                padding: "0 10px",
-                justifyContent: "space-between",
+                borderRadius: "32px",
+                overflow: "hidden",
+                border: "none",
+                boxShadow: "0 10px 40px -10px rgba(0, 0, 0, 0.08)",
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                "&:hover": {
+                  transform: "translateY(-12px)",
+                  boxShadow: "0 22px 48px -12px rgba(0, 0, 0, 0.12)",
+                },
+                position: "relative",
               }}
-              avatar={
-                <Avatar
-                  sx={{
-                    width: "fit-content",
-                    padding: "5px",
-                    fontSize: "12px",
-                    bgcolor: red[500],
-                  }}
-                >
-                  {item.mealType}
-                </Avatar>
-              }
-              action={
-                <IconButton
-                  sx={{
-                    margin: "0",
-                    padding: "15px ",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  aria-label="settings"
-                >
-                  <MoreVertIcon
+            >
+              {/* Image & Badge Area */}
+              <Box sx={{ position: "relative", pt: "75%", overflow: "hidden" }}>
+                <Link to={`/dish/${item.id}`}>
+                  <CardMedia
+                    component="img"
+                    image={item.img}
+                    alt={item.name}
                     sx={{
-                      fontSize: "30px",
-                      padding: " 0 0",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transition: "transform 0.8s ease",
+                      "&:hover": { transform: "scale(1.1)" },
                     }}
                   />
-                </IconButton>
-              }
-              title={
-                <Link
-                  to={`/dish/${item.id}`}
-                  style={{ textDecoration: "none", color: "black" }}
-                  key={index}
-                >
-                  {item.name}
                 </Link>
-              }
-              titleTypographyProps={{ fontSize: "20px" }}
-            />
-            <Link
-              to={`/dish/${item.id}`}
-              style={{ textDecoration: "none", color: "black" }}
-              key={index}
-            >
-              <CardMedia
-                component="img"
-                height="60%"
-                image={item.img}
-                alt={item.name}
-              />
-            </Link>
-            <div
-              style={{
-                height: "15%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <CardActions sx={{ padding: "0" }} disableSpacing>
+                <Chip
+                  label={item.mealType}
+                  sx={{
+                    position: "absolute",
+                    top: 20,
+                    left: 20,
+                    bgcolor: "rgba(38, 129, 108, 0.9)",
+                    color: "white",
+                    fontWeight: 800,
+                    fontSize: "10px",
+                    textTransform: "uppercase",
+                    letterSpacing: "1px",
+                    backdropFilter: "blur(4px)",
+                    height: "24px",
+                  }}
+                />
                 <IconButton
-                  onClick={() => {
-                    toggleFavorite(item.id);
-                  }}
-                  aria-label="add to favorites"
-                >
-                  <FavoriteIcon
-                    sx={{
-                      color: item.isFavorite ? "red" : "gray",
-                    }}
-                  />
-                </IconButton>
-                <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
-                <Typography
+                  onClick={() => toggleFavorite(item.id)}
                   sx={{
-                    fontSize: "16px",
-                    padding: "0 10px",
-                    fontWeight: "bold",
-                    color: "#c70000",
+                    position: "absolute",
+                    top: 16,
+                    right: 16,
+                    bgcolor: "rgba(255,255,255,0.85)",
+                    backdropFilter: "blur(8px)",
+                    "&:hover": { bgcolor: "white" },
+                    width: 40,
+                    height: 40,
+                    zIndex: 2
                   }}
-                  variant="body2"
-                  color="text.secondary"
                 >
-                  {item.rate + " ⭐"}
-                </Typography>
-              </CardActions>
-              <CardContent sx={{ padding: "0 !important" }}>
-                <Typography
+                  {item.isFavorite ? (
+                    <FavoriteIcon sx={{ color: "#d32f2f", fontSize: 22 }} />
+                  ) : (
+                    <FavoriteBorderIcon sx={{ color: "rgba(0,0,0,0.5)", fontSize: 22 }} />
+                  )}
+                </IconButton>
+              </Box>
+
+              {/* Card Content Area */}
+              <CardContent sx={{ p: 3, bgcolor: "white" }}>
+                <Box
                   sx={{
-                    fontSize: "16px",
-                    padding: "0 10px",
-                    fontWeight: "bold",
-                    color: "#c70000",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    mb: 4,
                   }}
-                  variant="body2"
-                  color="text.secondary"
                 >
-                  {item.price + " $"}
-                </Typography>
+                  <Link
+                    to={`/dish/${item.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontFamily: "Plus Jakarta Sans",
+                        fontWeight: 800,
+                        fontSize: "1.1rem",
+                        lineHeight: 1.3,
+                        mb: 0.5,
+                        display: "-webkit-box",
+                        overflow: "hidden",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 1,
+                      }}
+                    >
+                      {item.name}
+                    </Typography>
+                  </Link>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ color: "#ED6C02", fontSize: "16px", fontVariationSettings: "'FILL' 1" }}
+                    >
+                      star
+                    </span>
+                    <Typography
+                      variant="caption"
+                      sx={{ fontWeight: 800, color: "rgba(0,0,0,0.8)" }}
+                    >
+                      {item.rate}
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <Box>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        display: "block",
+                        textTransform: "uppercase",
+                        fontWeight: 800,
+                        letterSpacing: "0.5px",
+                        color: "rgba(0,0,0,0.4)",
+                        mb: 0.2,
+                        fontSize: "9px",
+                      }}
+                    >
+                      Daily Price
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontFamily: "Plus Jakarta Sans",
+                        fontWeight: 900,
+                        color: "#26816C",
+                      }}
+                    >
+                      ${item.price}
+                    </Typography>
+                  </Box>
+                  <Link to={`/dish/${item.id}`}>
+                    <IconButton
+                      sx={{
+                        bgcolor: "rgba(0,0,0,0.03)",
+                        "&:hover": { bgcolor: "#26816C", color: "white" },
+                        borderRadius: "14px",
+                        width: 44,
+                        height: 44,
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      <EastIcon fontSize="small" />
+                    </IconButton>
+                  </Link>
+                </Box>
               </CardContent>
-            </div>
-          </Card>
-        );
-      })}
-    </div>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 
