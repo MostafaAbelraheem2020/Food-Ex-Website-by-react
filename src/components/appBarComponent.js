@@ -99,7 +99,7 @@ export default function AppBarComponent() {
       }
     });
     return () => unsub();
-  }, []);
+  }, [setIsLoggedInState, setUserRole]);
 
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
