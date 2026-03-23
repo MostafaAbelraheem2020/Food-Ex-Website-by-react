@@ -1,29 +1,40 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebase/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { useState, useEffect } from "react";
 import { auth } from "../firebase/firebaseConfig";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Grid from "@mui/material/Grid";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
+import { 
+  AppBar, 
+  Box, 
+  Toolbar, 
+  Grid, 
+  IconButton, 
+  Typography, 
+  InputBase, 
+  Button, 
+  Menu, 
+  MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Divider,
+  Stack
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import MyContext from "./MainDataContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Menu, MenuItem } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import Swal from "sweetalert2";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: "12px",
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -54,9 +65,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "15ch",
       "&:focus": {
-        width: "20ch",
+        width: "25ch",
       },
     },
   },
@@ -73,10 +84,13 @@ export default function AppBarComponent() {
     setUserRole,
     UserActivatyFn,
   } = useContext(MyContext);
+  
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [user, setUser] = useState(null);
+
+  const openAuthMenu = Boolean(anchorEl);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
@@ -91,9 +105,7 @@ export default function AppBarComponent() {
               setUserRole(userData.role || "user");
             }
           })
-          .catch((error) => {
-            console.error("Error fetching user data:", error);
-          });
+          .catch((error) => console.error("Error fetching user data:", error));
       } else {
         setIsLoggedInState(false);
       }
@@ -103,22 +115,22 @@ export default function AppBarComponent() {
 
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   const handleLogout = async () => {
-    // حفظ حالة تسجيل الدخول في localStorage
-    setIsLoggedInState(true);
-    // تحديث حالة تسجيل الدخول في firebase
-
-    UserActivatyFn(auth.currentUser.uid, {
-      "userActivety.lastLogin": new Date().toISOString(),
-      "userActivety.isActive": false,
-    });
+    if (auth.currentUser) {
+      UserActivatyFn(auth.currentUser.uid, {
+        "userActivety.lastLogin": new Date().toISOString(),
+        "userActivety.isActive": false,
+      });
+    }
     await signOut(auth);
     navigate("/Login");
     handleMenuClose();
+    setMobileOpen(false);
 
     Swal.fire({
-      title: " وداعاً!",
+      title: "وداعاً!",
       text: "تم تسجيل خروجك",
       icon: "success",
       timer: 3000,
@@ -126,227 +138,146 @@ export default function AppBarComponent() {
     });
   };
 
+  const navLinks = [
+    { label: "Home", path: "/" },
+    { label: "Branches", path: "/Branches" },
+    { label: "About", path: "/About" },
+    { label: "Reviews", path: "/Reviews" },
+    { label: "Contact", path: "/Contact" },
+  ];
+
+  const drawer = (
+    <Box sx={{ p: 2, height: '100%', bgcolor: '#f7f7f7' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Typography variant="h6" sx={{ fontWeight: 800, color: '#26816C' }}>Menu</Typography>
+        <IconButton onClick={handleDrawerToggle}><CloseIcon /></IconButton>
+      </Box>
+      <Divider sx={{ mb: 2 }} />
+      <List>
+        {navLinks.map((link) => (
+          <ListItem key={link.path} disablePadding>
+            <ListItemButton 
+              onClick={() => { navigate(link.path); handleDrawerToggle(); }}
+              sx={{ borderRadius: '10px', mb: 1 }}
+            >
+              <ListItemText primary={link.label} primaryTypographyProps={{ fontWeight: 600 }} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider sx={{ my: 2 }} />
+      {!isLoggedInState ? (
+        <Stack spacing={2} sx={{ mt: 2 }}>
+          <Button fullWidth variant="contained" sx={{ bgcolor: '#26816C', borderRadius: '10px' }} onClick={() => { navigate('/Login'); handleDrawerToggle(); }}>Login</Button>
+          <Button fullWidth variant="outlined" sx={{ color: '#26816C', borderColor: '#26816C', borderRadius: '10px' }} onClick={() => { navigate('/Register'); handleDrawerToggle(); }}>Register</Button>
+        </Stack>
+      ) : (
+        <Button fullWidth variant="outlined" color="error" onClick={handleLogout}>Logout</Button>
+      )}
+    </Box>
+  );
+
   return (
-    <Box
-      sx={{
-        marginBottom: { xs: "56px", sm: "64px" },
-        flexGrow: 1,
-        backgroundColor: "#E9E7E7",
-      }}
-    >
-      <AppBar
-        position="fixed"
-        sx={{ backgroundColor: "#26816c", boxShadow: "none" }}
-      >
-        <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }}>
-          <Grid
-            container
-            alignItems="center"
-            spacing={1}
-            justifyContent="space-between"
-            sx={{ flexWrap: "nowrap" }}
-          >
-            {/* زر القائمة الجانبية - يظهر فقط على الشاشات الصغيرة */}
-            <Grid item xs="auto" sx={{ display: { xs: "block", md: "none" } }}>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-              >
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#26816c", boxShadow: "0 2px 10px rgba(0,0,0,0.1)" }}>
+        <Toolbar sx={{ minHeight: { xs: 64, sm: 70 }, px: { xs: 2, sm: 4 } }}>
+          <Grid container alignItems="center" spacing={1} sx={{ flexWrap: "nowrap" }}>
+            
+            {/* Mobile Menu Icon */}
+            <Grid item sx={{ display: { xs: "block", md: "none" } }}>
+              <IconButton color="inherit" onClick={handleDrawerToggle} edge="start">
                 <MenuIcon />
               </IconButton>
             </Grid>
 
-            {/* الشعار */}
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              md={3}
-              display={{ xs: "none", sm: "flex" }}
-              sx={{
-                alignItems: "center",
-                justifyContent: { xs: "center", md: "flex-start" },
-              }}
-            >
-              <Typography
-                variant="h5"
-                noWrap
-                component="div"
-                sx={{
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: { xs: "20px", sm: "25px", md: "30px" },
-                  "&:hover": {
-                    color: "hsl(183.53 68% 19.61%)",
-                    textDecoration: "none",
-                    fontSize: { xs: "22px", sm: "27px", md: "32px" },
-                  },
-                  transition: "0.3s",
+            {/* Logo */}
+            <Grid item sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 1, md: 0 }, mr: 3 }}>
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  fontWeight: 900, 
+                  fontFamily: 'Plus Jakarta Sans',
+                  fontSize: { xs: '1.2rem', sm: '1.5rem', md: '1.8rem' }
                 }}
               >
-                <Link
-                  to="/"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                  onClick={() => setMeals(sortedMeals)}
-                >
+                <Link to="/" style={{ textDecoration: 'none', color: 'white' }} onClick={() => setMeals(sortedMeals)}>
                   Food Ex
                 </Link>
               </Typography>
             </Grid>
 
-            {/* شريط البحث - يأخذ العرض الكامل على الجوال، ويضيق على الشاشات الأكبر */}
-            <Grid
-              item
-              xs={8}
-              sm={5}
-              md={5}
-              sx={{
-                display: "flex",
-                flexGrow: 1,
-              }}
-            >
-              <Search
-                sx={{
-                  width: {
-                    xs: "100%",
-                    sm: "auto",
-                    md: "100%",
-                    lg: "100%",
-                    xl: "100%",
-                  },
-                }}
-              >
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ "aria-label": "search" }}
+            {/* Navigation Desktop */}
+            <Grid item sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, gap: 2 }}>
+               {navLinks.slice(0, 4).map(link => (
+                 <Button 
+                   key={link.path} 
+                   color="inherit" 
+                   sx={{ fontWeight: 700, textTransform: 'none', fontSize: '0.95rem', opacity: 0.9, '&:hover': { opacity: 1 } }}
+                   onClick={() => navigate(link.path)}
+                 >
+                   {link.label}
+                 </Button>
+               ))}
+            </Grid>
+
+            {/* Search Bar - Hidden on very small xs, or responsive */}
+            <Grid item xs={true} sx={{ display: { xs: 'none', sm: 'flex' }, maxWidth: { md: '300px' } }}>
+              <Search>
+                <SearchIconWrapper><SearchIcon /></SearchIconWrapper>
+                <StyledInputBase 
+                  placeholder="Search..." 
                   onChange={(e) => handelSearch(e.target.value)}
-                  onBlur={(e) => {
-                    e.target.value = "";
-                    handelSearch("");
-                  }}
-                  sx={{ width: { xs: "100%", sm: "100%", md: "100%" } }}
                 />
               </Search>
             </Grid>
 
-            {/* أزرار الدخول/الخروج/الحساب */}
-            <Grid
-              item
-              xs={1}
-              sm={3}
-              md={3}
-              sx={{
-                display: "flex",
-                justifyContent: { xs: "flex-end", sm: "flex-end" },
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
+            {/* Auth Actions */}
+            <Grid item sx={{ ml: 'auto', display: 'flex', alignItems: 'center', gap: 1 }}>
               {isLoggedInState ? (
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <IconButton
-                    size="large"
-                    edge="end"
-                    color="inherit"
-                    onClick={handleMenuOpen}
-                  >
-                    <AccountCircleIcon sx={{ fontSize: "32px" }} />
+                <>
+                  <IconButton color="inherit" onClick={handleMenuOpen}>
+                    <AccountCircleIcon sx={{ fontSize: 32 }} />
                   </IconButton>
                   <Menu
                     anchorEl={anchorEl}
-                    open={open}
+                    open={openAuthMenu}
                     onClose={handleMenuClose}
-                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                    transformOrigin={{ vertical: "top", horizontal: "right" }}
+                    sx={{ mt: 1 }}
                   >
-                    <MenuItem
-                      disabled
-                      sx={{
-                        fontSize: "16px",
-                        color: "#1A2925",
-                        display: "flex",
-                        width: { xs: "100%", sm: "200px" },
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontWeight: "bold",
-                        borderRadius: "5px",
-                        flexDirection: "column",
-                        gap: "5px",
-                      }}
-                    >
-                      <Typography>Welcome</Typography>
-                      <Typography>
-                        {user ? user.displayName : "Guest"}
-                      </Typography>
-                    </MenuItem>
+                    <MenuItem disabled sx={{ fontWeight: 800 }}>{user?.displayName || "User"}</MenuItem>
                     {(userRole === "admin" || userRole === "owner") && (
-                      <Button
-                        variant="text"
-                        color="inherit"
-                        sx={{
-                          fontWeight: "bold",
-                          fontSize: { xs: "12px", sm: "16px" },
-                          color: "#105054",
-                          width: "100%",
-                          textAlign: "center",
-                        }}
-                        onClick={() => {
-                          handleMenuClose();
-                          navigate("/AdminDashbord");
-                        }}
-                      >
-                        Dashbord
-                      </Button>
+                      <MenuItem onClick={() => { navigate("/AdminDashbord"); handleMenuClose(); }}>Dashboard</MenuItem>
                     )}
-                    <MenuItem
-                      sx={{
-                        fontWeight: "bold",
-                        fontSize: { xs: "14px", sm: "16px" },
-                        color: "#105054",
-                        width: "100%",
-                        textAlign: "center",
-                      }}
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
                   </Menu>
-                </Box>
+                </>
               ) : (
-                <Box sx={{ display: "flex", gap: 1 }}>
-                  <Button
-                    variant="text"
-                    color="inherit"
-                    onClick={() => navigate("/Login")}
-                    sx={{
-                      fontWeight: "bold",
-                      fontSize: { xs: "12px", sm: "16px" },
-                    }}
-                  >
-                    Login
-                  </Button>
-                  <Button
-                    variant="text"
-                    color="inherit"
-                    onClick={() => navigate("/Register")}
-                    sx={{
-                      fontWeight: "bold",
-                      fontSize: { xs: "12px", sm: "16px" },
-                    }}
-                  >
-                    Register
-                  </Button>
+                <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1 }}>
+                  <Button color="inherit" sx={{ fontWeight: 700 }} onClick={() => navigate("/Login")}>Login</Button>
+                  <Button variant="contained" sx={{ bgcolor: 'rgba(255,255,255,0.2)', fontWeight: 700, borderRadius: '10px' }} onClick={() => navigate("/Register")}>Register</Button>
                 </Box>
               )}
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
+
+      {/* Responsive Drawer */}
+      <Drawer
+        anchor="left"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 280 },
+        }}
+      >
+        {drawer}
+      </Drawer>
+
+      {/* Spacer to prevent content from going under fixed Appbar */}
+      <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }} />
     </Box>
   );
 }

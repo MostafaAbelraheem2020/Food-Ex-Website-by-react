@@ -30,7 +30,7 @@ function FoodWebsite() {
       <Box 
         sx={{ 
           width: "100%", 
-          height: { xs: "200px", md: "300px" }, 
+          height: { xs: "250px", sm: "300px", md: "400px" }, 
           position: "relative",
           overflow: "hidden",
           mb: 6
@@ -44,7 +44,7 @@ function FoodWebsite() {
             width: "100%", 
             height: "100%", 
             objectFit: "cover",
-            filter: "brightness(0.7)"
+            filter: "brightness(0.65)"
           }}
         />
         <Box 
@@ -57,7 +57,7 @@ function FoodWebsite() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            px: { xs: 4, md: 10 },
+            px: { xs: 3, sm: 6, md: 10 },
             textAlign: { xs: "center", md: "left" },
             background: "linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 70%)"
           }}

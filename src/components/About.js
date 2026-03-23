@@ -13,9 +13,9 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh", pt: 10 }}>
+    <Box sx={{ bgcolor: "#F9FAF7", minHeight: "100vh", pt: 12 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={8} alignItems="center" sx={{ minHeight: "70vh", mb: 8 }}>
+        <Grid container spacing={{ xs: 4, md: 8 }} alignItems="center" sx={{ mb: 10 }}>
           {/* Text Content */}
           <Grid item xs={12} md={6}>
             <Typography
@@ -49,7 +49,7 @@ export default function About() {
                 color: "rgba(0,0,0,0.6)",
                 mb: 6,
                 lineHeight: 1.8,
-                fontSize: "1.1rem",
+                fontSize: "1.05rem",
                 textAlign: "justify",
                 maxWidth: "540px"
               }}
@@ -62,14 +62,14 @@ export default function About() {
               فاخر، ستجد لدينا خيارات ترضي جميع أفراد العائلة. نسعى دائماً لتقديم
               أفضل خدمة في أجواء مريحة وودية، ونسعد باستقبالكم في أي وقت.
             </Typography>
-            <Stack direction="row" spacing={3}>
+            <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap', gap: 2 }}>
               <Link to="/" style={{ textDecoration: "none" }}>
                 <Button
                   variant="contained"
                   sx={{
                     bgcolor: "#26816C",
                     borderRadius: "15px",
-                    px: 5,
+                    px: { xs: 3, sm: 5 },
                     py: 1.8,
                     fontWeight: 700,
                     textTransform: "none",
@@ -87,7 +87,7 @@ export default function About() {
                     borderColor: "rgba(38, 129, 108, 0.3)",
                     color: "#26816C",
                     borderRadius: "15px",
-                    px: 5,
+                    px: { xs: 3, sm: 5 },
                     py: 1.8,
                     fontWeight: 700,
                     textTransform: "none",
@@ -108,13 +108,14 @@ export default function About() {
                 "&::after": {
                   content: '""',
                   position: "absolute",
-                  top: -20,
-                  right: -20,
-                  bottom: 20,
-                  left: 20,
+                  top: -15,
+                  right: -15,
+                  bottom: 15,
+                  left: 15,
                   border: "2px solid #26816C",
                   borderRadius: "40px",
                   zIndex: 0,
+                  display: { xs: 'none', sm: 'block' }
                 }
               }}
             >
@@ -124,10 +125,10 @@ export default function About() {
                 alt="About Food Ex"
                 sx={{
                   width: "100%",
-                  height: { xs: "400px", md: "600px" },
+                  height: { xs: "300px", sm: "450px", md: "600px" },
                   objectFit: "cover",
                   borderRadius: "40px",
-                  boxShadow: "0 30px 60px -15px rgba(0,0,0,0.2)",
+                  boxShadow: "0 30px 60px -15px rgba(0,0,0,0.15)",
                   position: "relative",
                   zIndex: 1,
                 }}

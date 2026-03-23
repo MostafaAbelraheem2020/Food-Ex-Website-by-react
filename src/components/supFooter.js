@@ -6,22 +6,17 @@ const SupFooter = () => {
     <Box
       component="footer"
       sx={{
-        py: 2,
+        py: 4,
         px: 4,
-        mt: "auto",
-        backgroundColor: "dimgray",
+        backgroundColor: "#26816C",
         color: "white",
         textAlign: "center",
-        height: "20%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-
         width: "100%",
+        borderTop: "1px solid rgba(255,255,255,0.1)"
       }}
     >
       <div>

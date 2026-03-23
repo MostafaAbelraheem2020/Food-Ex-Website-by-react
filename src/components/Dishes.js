@@ -33,7 +33,7 @@ function Dishes() {
     <Box sx={{ width: "100%", px: { xs: 2, md: 4, lg: 6 }, py: 6 }}>
       <Grid container spacing={{ xs: 3, md: 4 }}>
         {meals.map((item) => (
-          <Grid item xs={12} sm={6} md={6} lg={6} xl={6} key={item.id}>
+          <Grid item xs={12} sm={6} md={4} key={item.id}>
             <Card
               sx={{
                 borderRadius: "32px",
@@ -169,7 +169,7 @@ function Dishes() {
                         letterSpacing: "0.5px",
                         color: "rgba(0,0,0,0.4)",
                         mb: 0.2,
-                        fontSize: "9px",
+                        fontSize: "11px",
                       }}
                     >
                       Daily Price
