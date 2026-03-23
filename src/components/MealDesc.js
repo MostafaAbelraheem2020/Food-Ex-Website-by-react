@@ -1,6 +1,23 @@
 import { useParams, Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import MyContext from "./MainDataContext";
+import {
+  Box,
+  Typography,
+  Grid,
+  Chip,
+  Checkbox,
+  Button,
+  IconButton,
+} from "@mui/material";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import StarIcon from "@mui/icons-material/Star";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
 
 function MealDesc() {
   const { meals } = useContext(MyContext);
@@ -11,229 +28,413 @@ function MealDesc() {
   const [extras, setExtras] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
-  // Reset state and scroll to top when meal changes
   useEffect(() => {
     setSpiceLevel("Medium");
     setExtras([]);
     setQuantity(1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
 
   if (!selectedMeal) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] font-work-sans">
-        <p className="text-xl font-semibold text-on-surface-variant">Meal not found</p>
-        <Link to="/" className="mt-4 text-primary font-bold hover:underline">Go back to menu</Link>
-      </div>
+      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "60vh" }}>
+        <Typography variant="h6" sx={{ color: "rgba(0,0,0,0.6)", fontWeight: 600 }}>Meal not found</Typography>
+        <Link to="/" style={{ textDecoration: "none", marginTop: 16 }}>
+          <Typography sx={{ color: "#046453", fontWeight: 700, "&:hover": { textDecoration: "underline" } }}>Go back to menu</Typography>
+        </Link>
+      </Box>
     );
   }
 
   const toggleExtra = (extra) => {
-    setExtras(prev => 
-      prev.includes(extra) ? prev.filter(e => e !== extra) : [...prev, extra]
+    setExtras((prev) =>
+      prev.includes(extra) ? prev.filter((e) => e !== extra) : [...prev, extra]
     );
   };
 
+  const extraItems = [
+    { name: "Extra Lemon Sauce", price: 2.5 },
+    { name: "Garlic Crust", price: 1.75 },
+  ];
+
+  const spiceLevels = ["Mild", "Medium", "Hot"];
+
   return (
-    <div key={id} className="bg-background min-h-screen font-work-sans text-on-surface pt-5 animate-product-fade">
-      <main className="max-w-7xl mx-auto px-6 py-8 md:py-8">
-        {/* Breadcrumb - Compact */}
-        <nav className="mb-6 flex items-center space-x-2 text-xs md:text-sm text-on-surface-variant/60">
-          <Link to="/" className="hover:text-primary transition-colors">Explore</Link>
-          <span className="material-symbols-outlined text-[10px]">chevron_right</span>
-          <span>{selectedMeal.category}</span>
-          <span className="material-symbols-outlined text-[10px]">chevron_right</span>
-          <span className="text-primary font-medium">{selectedMeal.name}</span>
-        </nav>
+    <Box
+      key={id}
+      sx={{
+        bgcolor: "#f9f9f9",
+        minHeight: "100vh",
+        pt: { xs: 2, md: 4 },
+        animation: "fadeInUp 0.5s ease-out forwards",
+        "@keyframes fadeInUp": {
+          from: { opacity: 0, transform: "translateY(15px)" },
+          to: { opacity: 1, transform: "translateY(0)" },
+        },
+      }}
+    >
+      <Box sx={{ maxWidth: "1280px", mx: "auto", px: { xs: 2, sm: 4, md: 6 }, py: { xs: 3, md: 4 } }}>
 
-        {/* Product Hero Section - Rebalanced */}
-        <div className="grid grid-cols-1 lg:grid-cols-11 gap-10 xl:gap-16 mb-16">
+        {/* Breadcrumb */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mb: 4, flexWrap: "wrap" }}>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography variant="caption" sx={{ color: "#046453", fontWeight: 600, "&:hover": { opacity: 0.8 } }}>
+              Explore
+            </Typography>
+          </Link>
+          <ChevronRightIcon sx={{ fontSize: 14, color: "rgba(0,0,0,0.4)" }} />
+          <Typography variant="caption" sx={{ color: "rgba(0,0,0,0.5)" }}>{selectedMeal.category}</Typography>
+          <ChevronRightIcon sx={{ fontSize: 14, color: "rgba(0,0,0,0.4)" }} />
+          <Typography variant="caption" sx={{ color: "#046453", fontWeight: 600 }}>{selectedMeal.name}</Typography>
+        </Box>
+
+        {/* Product Hero */}
+        <Grid container spacing={{ xs: 4, lg: 8 }} sx={{ mb: { xs: 6, md: 10 } }}>
+
           {/* Image Column */}
-          <div className="lg:col-span-5 relative">
-
-              <div 
-                className="rounded-4xl overflow-hidden editorial-shadow bg-surface-container-low relative mx-auto lg:mx-0 w-full"
-                style={{ height: '100%' }}
+          <Grid item xs={12} lg={5}>
+            <Box sx={{ position: "relative" }}>
+              <Box
+                sx={{
+                  borderRadius: "2rem",
+                  overflow: "hidden",
+                  boxShadow: "0 10px 40px -10px rgba(0,0,0,0.08)",
+                  bgcolor: "#f3f3f3",
+                  aspectRatio: "4/3",
+                }}
               >
-                <img
+                <Box
+                  component="img"
                   src={selectedMeal.img}
                   alt={selectedMeal.name}
-                  className="w-full h-full object-cover"
+                  sx={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-secondary text-on-primary px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">
-                    Popular
-                  </span>
-                </div>
-              </div>
-              {/* Overlapping Badge - Scaled Down */}
-              <div className="absolute -bottom-5 -right-2 md:right-4 bg-surface-container-lowest p-4 rounded-xl editorial-shadow flex items-center space-x-3">
-                <div className="bg-primary-container text-on-primary w-8 h-8 rounded-full flex items-center justify-center">
-                  <span className="material-symbols-outlined fill-1 text-[14px]">verified</span>
-                </div>
-                <div>
-                  <p className="text-[9px] font-bold text-on-surface-variant uppercase tracking-tighter">Chef's Choice</p>
-                  <p className="text-[11px] font-medium leading-none">Curated Daily</p>
-                </div>
-              </div>
-      
-          </div>
+                <Chip
+                  label="Popular"
+                  size="small"
+                  sx={{
+                    position: "absolute",
+                    top: 16,
+                    left: 16,
+                    bgcolor: "#b3272a",
+                    color: "white",
+                    fontWeight: 800,
+                    fontSize: "10px",
+                    letterSpacing: "1px",
+                    textTransform: "uppercase",
+                    height: 24,
+                  }}
+                />
+              </Box>
 
-          {/* Details Column - Optimized Spacing */}
-          <div className="lg:col-span-6 flex flex-col justify-start mt-6 lg:mt-0 lg:pl-4">
-            <div className="mb-5">
-              <div className="flex items-center space-x-1 text-secondary mb-2">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <span key={star} className="material-symbols-outlined text-[14px] fill-1">
-                    {star <= 4 ? "star" : "star_half"}
-                  </span>
+              {/* Chef's Badge */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: -20,
+                  right: { xs: -8, md: 16 },
+                  bgcolor: "white",
+                  p: 2,
+                  borderRadius: "12px",
+                  boxShadow: "0 10px 40px -10px rgba(0,0,0,0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                }}
+              >
+                <Box sx={{ bgcolor: "#2d7d6b", color: "white", width: 32, height: 32, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <VerifiedIcon sx={{ fontSize: 14 }} />
+                </Box>
+                <Box>
+                  <Typography sx={{ fontSize: "9px", fontWeight: 800, color: "rgba(0,0,0,0.5)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Chef's Choice</Typography>
+                  <Typography sx={{ fontSize: "11px", fontWeight: 500, lineHeight: 1 }}>Curated Daily</Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
+
+          {/* Details Column */}
+          <Grid item xs={12} lg={7}>
+            <Box sx={{ mt: { xs: 4, lg: 0 } }}>
+
+              {/* Stars & Reviews */}
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mb: 2 }}>
+                {[1, 2, 3, 4].map((s) => (
+                  <StarIcon key={s} sx={{ fontSize: 16, color: "#b3272a" }} />
                 ))}
-                <span className="text-on-surface-variant text-xs font-medium ml-2">
+                <StarHalfIcon sx={{ fontSize: 16, color: "#b3272a" }} />
+                <Typography variant="caption" sx={{ ml: 1, color: "rgba(0,0,0,0.5)", fontWeight: 500 }}>
                   4.8 ({selectedMeal.rate} Reviews)
-                </span>
-              </div>
-              <h1 className="text-3xl md:text-4xl xl:text-5xl font-plus-jakarta font-extrabold text-on-surface leading-[1.15] mb-3">
+                </Typography>
+              </Box>
+
+              {/* Title */}
+              <Typography
+                variant="h1"
+                sx={{
+                  fontSize: { xs: "2rem", md: "2.5rem", xl: "3rem" },
+                  fontFamily: "Plus Jakarta Sans",
+                  fontWeight: 900,
+                  color: "#1a1c1c",
+                  lineHeight: 1.15,
+                  mb: 2,
+                }}
+              >
                 {selectedMeal.name}
-              </h1>
-              <p className="text-base text-on-surface-variant font-normal leading-relaxed max-w-lg">
+              </Typography>
+
+              <Typography variant="body1" sx={{ color: "rgba(0,0,0,0.55)", lineHeight: 1.7, maxWidth: "500px", mb: 3 }}>
                 {selectedMeal.description}
-              </p>
-            </div>
+              </Typography>
 
-            {/* Pricing - Slimmer */}
-            <div className="bg-surface-container-low p-4 rounded-xl mb-6 flex items-baseline space-x-3">
-              <span className="text-2xl font-bold text-primary">${selectedMeal.price}</span>
-              <span className="text-on-surface-variant/40 line-through text-sm">${(selectedMeal.price * 1.25).toFixed(2)}</span>
-              <span className="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded text-[10px] font-bold">SALE -25%</span>
-            </div>
+              {/* Pricing */}
+              <Box
+                sx={{
+                  bgcolor: "#f3f3f3",
+                  p: 2,
+                  borderRadius: "12px",
+                  mb: 4,
+                  display: "flex",
+                  alignItems: "baseline",
+                  gap: 2,
+                }}
+              >
+                <Typography variant="h5" sx={{ fontWeight: 800, color: "#046453" }}>${selectedMeal.price}</Typography>
+                <Typography sx={{ color: "rgba(0,0,0,0.3)", textDecoration: "line-through", fontSize: "0.9rem" }}>
+                  ${(selectedMeal.price * 1.25).toFixed(2)}
+                </Typography>
+                <Box sx={{ bgcolor: "rgba(179,39,42,0.1)", color: "#b3272a", px: 1, py: 0.3, borderRadius: "4px", fontSize: "10px", fontWeight: 800 }}>
+                  SALE -25%
+                </Box>
+              </Box>
 
-            {/* Customization Options - Compact Grid */}
-            <div className="space-y-6 mb-8">
               {/* Spice Level */}
-              <div>
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant/80 mb-3">Spice Intensity</h3>
-                <div className="flex flex-wrap gap-2">
-                  {["Mild", "Medium", "Hot"].map((level) => (
-                    <button
+              <Box sx={{ mb: 3 }}>
+                <Typography sx={{ fontSize: "10px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(0,0,0,0.5)", mb: 1.5 }}>
+                  Spice Intensity
+                </Typography>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                  {spiceLevels.map((level) => (
+                    <Button
                       key={level}
+                      variant={spiceLevel === level ? "contained" : "outlined"}
+                      size="small"
                       onClick={() => setSpiceLevel(level)}
-                      className={`px-5 py-1.5 rounded-lg transition-all text-xs font-bold ${
-                        spiceLevel === level
-                          ? "bg-primary text-white shadow-lg shadow-primary/20"
-                          : "bg-surface-container-highest/50 text-on-surface hover:bg-surface-container-highest"
-                      }`}
+                      sx={{
+                        borderRadius: "8px",
+                        textTransform: "none",
+                        fontWeight: 700,
+                        fontSize: "12px",
+                        bgcolor: spiceLevel === level ? "#046453" : "transparent",
+                        borderColor: spiceLevel === level ? "#046453" : "#e0e0e0",
+                        color: spiceLevel === level ? "white" : "rgba(0,0,0,0.7)",
+                        boxShadow: spiceLevel === level ? "0 8px 20px -6px rgba(4,100,83,0.4)" : "none",
+                        "&:hover": {
+                          bgcolor: spiceLevel === level ? "#035a47" : "rgba(4,100,83,0.05)",
+                          borderColor: "#046453",
+                        },
+                      }}
                     >
                       {level}
-                    </button>
+                    </Button>
                   ))}
-                </div>
-              </div>
+                </Box>
+              </Box>
 
-              {/* Extras - Grid Layout */}
-              <div>
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant/80 mb-3">Enhance Your Plate</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {[
-                    { name: "Extra Lemon Sauce", price: 2.5 },
-                    { name: "Garlic Crust", price: 1.75 },
-                  ].map((extra) => (
-                    <label
-                      key={extra.name}
-                      className={`flex items-center justify-between p-3 rounded-lg border-[1.5px] transition-all cursor-pointer group ${
-                        extras.includes(extra.name) 
-                          ? "bg-primary/5 border-primary" 
-                          : "bg-surface-container-lowest border-transparent hover:border-surface-container-highest"
-                      }`}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          checked={extras.includes(extra.name)}
-                          onChange={() => toggleExtra(extra.name)}
-                          className="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20"
-                        />
-                        <span className="text-xs font-semibold">{extra.name}</span>
-                      </div>
-                      <span className="text-[11px] font-bold text-primary/80">+${extra.price}</span>
-                    </label>
+              {/* Extras */}
+              <Box sx={{ mb: 3 }}>
+                <Typography sx={{ fontSize: "10px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(0,0,0,0.5)", mb: 1.5 }}>
+                  Enhance Your Plate
+                </Typography>
+                <Grid container spacing={1.5}>
+                  {extraItems.map((extra) => (
+                    <Grid item xs={12} sm={6} key={extra.name}>
+                      <Box
+                        onClick={() => toggleExtra(extra.name)}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          p: 1.5,
+                          borderRadius: "10px",
+                          border: "1.5px solid",
+                          borderColor: extras.includes(extra.name) ? "#046453" : "transparent",
+                          bgcolor: extras.includes(extra.name) ? "rgba(4,100,83,0.04)" : "#f3f3f3",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
+                          "&:hover": { borderColor: "#046453" },
+                        }}
+                      >
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                          <Checkbox
+                            checked={extras.includes(extra.name)}
+                            onChange={() => toggleExtra(extra.name)}
+                            size="small"
+                            sx={{ p: 0, color: "#046453", "&.Mui-checked": { color: "#046453" } }}
+                          />
+                          <Typography sx={{ fontSize: "12px", fontWeight: 600 }}>{extra.name}</Typography>
+                        </Box>
+                        <Typography sx={{ fontSize: "11px", fontWeight: 800, color: "#046453" }}>+${extra.price}</Typography>
+                      </Box>
+                    </Grid>
                   ))}
-                </div>
-              </div>
+                </Grid>
+              </Box>
 
-              {/* Quantity & Summary */}
-              <div className="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl border border-surface-container-low">
-                <div className="flex items-center bg-surface-container-high/50 rounded-lg p-1">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-surface-container-lowest transition-colors"
+              {/* Quantity */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  p: 1.5,
+                  bgcolor: "white",
+                  borderRadius: "12px",
+                  border: "1px solid #f3f3f3",
+                  mb: 4,
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center", bgcolor: "#f3f3f3", borderRadius: "10px", p: 0.5 }}>
+                  <IconButton size="small" onClick={() => setQuantity(Math.max(1, quantity - 1))} sx={{ borderRadius: "8px" }}>
+                    <RemoveIcon sx={{ fontSize: 18 }} />
+                  </IconButton>
+                  <Typography sx={{ px: 2, fontWeight: 800, fontSize: "1rem", minWidth: 32, textAlign: "center" }}>{quantity}</Typography>
+                  <IconButton size="small" onClick={() => setQuantity(quantity + 1)} sx={{ bgcolor: "#046453", color: "white", borderRadius: "8px", "&:hover": { bgcolor: "#035a47" } }}>
+                    <AddIcon sx={{ fontSize: 18 }} />
+                  </IconButton>
+                </Box>
+                <Box sx={{ textAlign: "right" }}>
+                  <Typography sx={{ fontSize: "10px", color: "rgba(0,0,0,0.5)", fontWeight: 500 }}>Estimate Total</Typography>
+                  <Typography sx={{ fontSize: "1.1rem", fontWeight: 800, color: "#046453" }}>${(selectedMeal.price * quantity).toFixed(2)}</Typography>
+                </Box>
+              </Box>
+
+              {/* Action Buttons */}
+              <Grid container spacing={1.5}>
+                <Grid item xs={12} sm={6}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    sx={{
+                      bgcolor: "#046453",
+                      borderRadius: "12px",
+                      py: 1.8,
+                      fontFamily: "Plus Jakarta Sans",
+                      fontWeight: 700,
+                      fontSize: "1rem",
+                      textTransform: "none",
+                      boxShadow: "0 20px 40px -12px rgba(4,100,83,0.3)",
+                      "&:hover": { bgcolor: "#035a47", opacity: 0.95 },
+                      "&:active": { transform: "scale(0.98)" },
+                    }}
                   >
-                    <span className="material-symbols-outlined text-[16px]">remove</span>
-                  </button>
-                  <span className="px-4 font-bold text-base w-10 text-center">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-white"
+                    Buy Now
+                  </Button>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    startIcon={<ShoppingBagIcon />}
+                    sx={{
+                      borderRadius: "12px",
+                      py: 1.8,
+                      fontFamily: "Plus Jakarta Sans",
+                      fontWeight: 700,
+                      fontSize: "1rem",
+                      textTransform: "none",
+                      color: "rgba(0,0,0,0.7)",
+                      borderColor: "#e0e0e0",
+                      bgcolor: "#e2e2e2",
+                      "&:hover": { bgcolor: "#d8d8d8", borderColor: "#d8d8d8" },
+                      "&:active": { transform: "scale(0.98)" },
+                    }}
                   >
-                    <span className="material-symbols-outlined text-[16px]">add</span>
-                  </button>
-                </div>
-                <div className="text-right">
-                  <p className="text-[10px] text-on-surface-variant font-medium">Estimate Total</p>
-                  <p className="text-lg font-bold text-primary">${(selectedMeal.price * quantity).toFixed(2)}</p>
-                </div>
-              </div>
-            </div>
+                    Add to Cart
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+        </Grid>
 
-            {/* Action Buttons - Premium Feel */}
-            <div className="grid grid-cols-2 gap-3">
-              <button className="bg-primary text-on-primary py-3.5 rounded-xl font-plus-jakarta font-bold text-base shadow-xl shadow-primary/20 hover:opacity-95 active:scale-95 transition-all">
-                Buy Now
-              </button>
-              <button className="bg-surface-container-highest text-on-surface py-3.5 rounded-xl font-plus-jakarta font-bold text-base hover:bg-surface-container-high active:scale-95 transition-all flex items-center justify-center space-x-2">
-                <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
-                <span>Add to Cart</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Recommendations - Refined Cards */}
-        <section className="mt-20 border-t border-surface-container-low pt-16">
-          <div className="flex justify-between items-end mb-8">
-            <div>
-              <span className="text-secondary font-bold text-[10px] uppercase tracking-[0.2em] block mb-1">The Curator Recommends</span>
-              <h2 className="text-2xl font-plus-jakarta font-extrabold">You Might Also Like</h2>
-            </div>
-            <Link to="/" className="text-primary font-bold text-xs flex items-center space-x-1 group">
-              <span>View Full Menu</span>
-              <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        {/* Recommendations */}
+        <Box component="section" sx={{ mt: { xs: 8, md: 12 }, pt: { xs: 6, md: 8 }, borderTop: "1px solid #f3f3f3" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", mb: 4, flexWrap: "wrap", gap: 2 }}>
+            <Box>
+              <Typography sx={{ color: "#b3272a", fontWeight: 800, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", display: "block", mb: 0.5 }}>
+                The Curator Recommends
+              </Typography>
+              <Typography variant="h5" sx={{ fontFamily: "Plus Jakarta Sans", fontWeight: 900 }}>
+                You Might Also Like
+              </Typography>
+            </Box>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, color: "#046453" }}>
+                <Typography sx={{ fontWeight: 700, fontSize: "13px" }}>View Full Menu</Typography>
+                <ArrowForwardIcon sx={{ fontSize: 16 }} />
+              </Box>
             </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </Box>
+
+          <Grid container spacing={3}>
             {meals.slice(0, 3).map((meal) => (
-              <Link key={meal.id} to={`/dish/${meal.id}`} className="bg-surface-container-lowest rounded-2xl overflow-hidden hover:-translate-y-1.5 transition-transform duration-300 group editorial-shadow">
-                <div className="aspect-[16/10] overflow-hidden relative">
-                  <img src={meal.img} alt={meal.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur shadow-sm px-2 py-0.5 rounded-full flex items-center space-x-1">
-                    <span className="material-symbols-outlined text-secondary text-[12px] fill-1">star</span>
-                    <span className="text-[10px] font-bold">4.8</span>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold mb-3">{meal.name}</h3>
-                  <div className="flex justify-between items-center">
-                    <span className="text-primary font-bold text-base">${meal.price}</span>
-                    <div className="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-                      <span className="material-symbols-outlined text-[18px]">add</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <Grid item xs={12} sm={6} md={4} key={meal.id}>
+                <Link to={`/dish/${meal.id}`} style={{ textDecoration: "none" }}>
+                  <Box
+                    sx={{
+                      bgcolor: "white",
+                      borderRadius: "16px",
+                      overflow: "hidden",
+                      boxShadow: "0 10px 40px -10px rgba(0,0,0,0.08)",
+                      transition: "transform 0.3s ease",
+                      "&:hover": { transform: "translateY(-6px)" },
+                    }}
+                  >
+                    <Box sx={{ aspectRatio: "16/10", overflow: "hidden", position: "relative" }}>
+                      <Box
+                        component="img"
+                        src={meal.img}
+                        alt={meal.name}
+                        sx={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.7s ease", "&:hover": { transform: "scale(1.05)" } }}
+                      />
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          top: 12,
+                          right: 12,
+                          bgcolor: "rgba(255,255,255,0.95)",
+                          backdropFilter: "blur(4px)",
+                          px: 1,
+                          py: 0.3,
+                          borderRadius: "50px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 0.5,
+                          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                        }}
+                      >
+                        <StarIcon sx={{ fontSize: 12, color: "#b3272a" }} />
+                        <Typography sx={{ fontSize: "10px", fontWeight: 800 }}>4.8</Typography>
+                      </Box>
+                    </Box>
+                    <Box sx={{ p: 2.5 }}>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>{meal.name}</Typography>
+                      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <Typography sx={{ color: "#046453", fontWeight: 800, fontSize: "1rem" }}>${meal.price}</Typography>
+                        <Box sx={{ width: 32, height: 32, borderRadius: "8px", bgcolor: "#f3f3f3", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <AddIcon sx={{ fontSize: 18, color: "rgba(0,0,0,0.6)" }} />
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Link>
+              </Grid>
             ))}
-          </div>
-        </section>
-      </main>
-    </div>
+          </Grid>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
